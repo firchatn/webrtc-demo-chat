@@ -1,45 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
-</head>
-<body>
-<audio id="myAudio" controls autoplay ></audio>
-
-<script type="text/javascript">
-	var id2;
-	var peer1 = new Peer({key: 'l15v4rrvzkcvj9k9'});
-	var peer2 = new Peer({key: 'r64168xoht4yrpb9'});
-	var stream;
-	var x = document.getElementById("myAudio");
-
-
-
-
-
-
-function pauseAudio() {
-    x.pause();
-} 
-
-peer1.on('open', function(id2) {
-  console.log('I\'m peer1 and my id is: ' + id2);
-});
-
-
-peer2.on('open', function(id) {
-  console.log('I\'m peer2 and my id is: ' + id);
-});
-
-
-
+var id2;
+var peer1 = new Peer({key: 'l15v4rrvzkcvj9k9'});
+var peer2 = new Peer({key: 'r64168xoht4yrpb9'});
+var stream;
+var x = document.getElementById("myAudio");
+var clickerFn;
+var el = document.getElementById('p');
 var audio = document.querySelector('audio');
 
 var constraints = window.constraints = {
   audio: true,
   video: false
 };
+
+clickerFn = function() {
+    if (x.paused) {
+        x.play();
+    }
+    else{
+       x.pause();
+  }
+}
+
+el.addEventListener('click', clickerFn);
+
+peer1.on('open', function(id2) {
+  console.log('I\'m peer1 and my id is: ' + id2);
+});
+
+peer2.on('open', function(id) {
+  console.log('I\'m peer2 and my id is: ' + id);
+});
 
 function handleSuccess(stream) {
   var audioTracks = stream.getAudioTracks();
@@ -63,23 +53,12 @@ navigator.mediaDevices.getUserMedia(constraints).
 mediaStream = stream;
 
 
-function playAudio() {
-    x.play();
-    
-}
+peer2.call(id2, mediaStream);
 
-
-peer1.on('call', function(call) {
+var call = peer1.on('call', function(call) {
   call.answer(mediaStream);
 });
 
 call.on('stream', function(stream) {
-  // `stream` is the MediaStream of the remote peer.
-  // Here you'd add it to an HTML video/canvas element.
   audio.srcObject = stream;
-
 });
-</script>
-<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
-</body>
-</html>

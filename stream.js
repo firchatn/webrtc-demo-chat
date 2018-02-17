@@ -1,3 +1,4 @@
+
 var id2;
 var peer1 = new Peer({key: 'l15v4rrvzkcvj9k9'});
 var peer2 = new Peer({key: 'r64168xoht4yrpb9'});
@@ -55,7 +56,7 @@ mediaStream = stream;
 
 peer1.call(id2, mediaStream);
 
-peer2.on('call', function(call) {
+var call = peer2.on('call', function(call) {
   call.answer(mediaStream);
 });
 

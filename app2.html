@@ -23,13 +23,13 @@ function pauseAudio() {
     x.pause();
 } 
 
-peer1.on('open', function(id) {
-  console.log('I\'m peer1 and my id is: ' + id);
+peer1.on('open', function(id2) {
+  console.log('I\'m peer1 and my id is: ' + id2);
 });
 
 
-peer2.on('open', function(id2) {
-  console.log('I\'m peer2 and my id is: ' + id2);
+peer2.on('open', function(id) {
+  console.log('I\'m peer2 and my id is: ' + id);
 });
 
 
@@ -65,12 +65,12 @@ mediaStream = stream;
 
 function playAudio() {
     x.play();
-    peer1.call(id2, mediaStream);
+    
 }
 
-
+peer2.call(id2, mediaStream);
 // answer call from peer1
-peer2.on('call', function(call) {
+peer1.on('call', function(call) {
   call.answer(mediaStream);
 });
 

@@ -24,12 +24,12 @@ clickerFn = function() {
 
 el.addEventListener('click', clickerFn);
 
-peer1.on('open', function(id) {
-  console.log('I\'m peer1 and my id is: ' + id);
+peer1.on('open', function(id2) {
+  console.log('I\'m peer1 and my id is: ' + id2);
 });
 
-peer2.on('open', function(id2) {
-  console.log('I\'m peer2 and my id is: ' + id2);
+peer2.on('open', function(id) {
+  console.log('I\'m peer2 and my id is: ' + id);
 });
 
 function handleSuccess(stream) {
@@ -54,9 +54,9 @@ navigator.mediaDevices.getUserMedia(constraints).
 mediaStream = stream;
 
 
-peer1.call(id2, mediaStream);
+peer2.call(id2, mediaStream);
 
-var call = peer2.on('call', function(call) {
+var call = peer1.on('call', function(call) {
   call.answer(mediaStream);
 });
 

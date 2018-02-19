@@ -56,6 +56,7 @@ peer2.on('open', function(id2) {
   console.log('I\'m peer2 and my id is: ' + id2);
 });
 
+
 mediaStream = stream;
 console.log('ok1');
 peer1.call(id2, mediaStream);

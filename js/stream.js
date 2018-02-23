@@ -65,10 +65,11 @@ peer2.on('call', function(call) {
     console.log('ok3');
     // answer call from peer1
     call.answer(mediaStream);    
-    console.log('ok');
+    console.log('ok4');
     // stream to the #partner canvas
     call.on('stream', function(stream){
-        audio.srcObject = window.URL.createObjectURL(stream);
+        //audio.srcObject = window.URL.createObjectURL(stream);
+        audio.srcObject = stream;
     });
 });
-console.log('ok4');
+console.log('ok5');
